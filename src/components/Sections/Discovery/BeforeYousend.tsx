@@ -1,9 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState,useRef } from 'react';
 import { ArrowUpRight, Plus, X } from 'lucide-react';
-
+import { Link } from 'react-router-dom';
+import {useGSAP} from "@gsap/react"
+import gsap from 'gsap';
 export const BeforeYouSendSection: React.FC = () => {
   const [openIndex, setOpenIndex] = useState<number | null>(0); // Default first item open as shown in image
-
+const sectionRef = useRef<HTMLElement>(null);
   const faqs = [
     {
       question: "Is the website review really free?",
@@ -34,13 +36,50 @@ export const BeforeYouSendSection: React.FC = () => {
       answer: "While we are based in Mesa and work heavily with Arizona businesses, we review and build websites for clients across the country."
     }
   ];
+useGSAP(() => {
+  gsap.from(".faq-intro", {
+    y: 20,
+    opacity: 0,
+    duration: 0.7,
+    ease: "power2.out",
+    scrollTrigger: {
+      trigger: ".faq-section",
+      start: "top 80%",
+      toggleActions: "play none none reverse",
+    },
+  });
 
+  gsap.set(".faq-item", {
+    clearProps: "all",
+  });
+
+  gsap.fromTo(
+    ".faq-item",
+    {
+      y: 15,
+      autoAlpha: 0,
+    },
+    {
+      y: 0,
+      autoAlpha: 1,
+      duration: 0.5,
+      stagger: 0.1,
+      ease: "power2.out",
+      clearProps: "opacity,visibility,transform",
+      scrollTrigger: {
+        trigger: ".faq-list",
+        start: "top 85%",
+        toggleActions: "play none none reverse",
+      },
+    }
+  );
+}, { scope: sectionRef });
   return (
-    <section className="w-full bg-[#f4f2eb] text-gray-900 py-20 px-6 sm:px-6 lg:px-6 font-sans">
+    <section ref={sectionRef} className="faq-section w-full bg-[#f3f1ec] text-gray-900 py-20 px-6 sm:px-6 lg:px-6 font-sans">
       <div className="max-w-9xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
         
         {/* Left Column: Heading and Subtext */}
-        <div className="lg:col-span-5 flex flex-col items-start">
+        <div className="faq-intro lg:col-span-5 flex flex-col items-start">
           <h2 className="text-2xl sm:text-3xl lg:text-4xl font-semibold tracking-tight text-gray-900 mb-6 leading-[1.1]">
             Before you <br />
             send it over.
@@ -50,23 +89,23 @@ export const BeforeYouSendSection: React.FC = () => {
             The questions owners usually ask before handing over their web address.
           </p>
 
-          <a
-            href="#contact"
-            className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-semibold text-gray-700 hover:text-purple-700 transition-colors"
+          <Link
+            to="/contact"
+            className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-semibold text-gray-700 hover:text-[#94B49F] transition-colors"
           >
             Ask me something else
             <ArrowUpRight className="w-4 h-4" />
-          </a>
+          </Link>
         </div>
 
         {/* Right Column: FAQ Accordion Stack */}
-        <div className="lg:col-span-7 flex flex-col gap-3">
+        <div className="faq-list lg:col-span-7 flex flex-col gap-3">
           {faqs.map((faq, index) => {
             const isOpen = openIndex === index;
             return (
               <div
                 key={index}
-                className="bg-gray-100 border border-gray-400/50 rounded-xl transition-all duration-200 overflow-hidden"
+                className="faq-item bg-gray-50 border border-gray-300/50 rounded-xl transition-all duration-200 overflow-hidden"
               >
                 <button
                   onClick={() => setOpenIndex(isOpen ? null : index)}

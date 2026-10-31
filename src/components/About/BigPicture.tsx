@@ -1,5 +1,10 @@
 import React, { useEffect, useRef } from 'react';
-import { ArrowUpRight } from 'lucide-react';
+import { useGSAP } from '@gsap/react';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { SplitText } from 'gsap/SplitText';
+
+gsap.registerPlugin(useGSAP, ScrollTrigger, SplitText);
 
 export const BigPictureSection: React.FC = () => {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
@@ -91,6 +96,72 @@ export const BigPictureSection: React.FC = () => {
     };
   }, []);
 
+
+  useGSAP(() => {
+  const heading = new SplitText(".about-services-heading", {
+    type: "chars",
+  });
+
+  const tl = gsap.timeline({
+    scrollTrigger: {
+      trigger: ".about-services-section",
+      start: "top 70%",
+      toggleActions: "play none none reverse",
+    },
+  });
+
+  tl.from(".about-services-label", {
+    y: 15,
+    opacity: 0,
+    duration: 0.5,
+    ease: "power2.out",
+  })
+    .from(
+      heading.chars,
+      {
+        yPercent: 100,
+        opacity: 0,
+        duration: 0.7,
+        stagger: 0.025,
+        ease: "power3.out",
+      },
+      "-=0.15",
+    )
+    .from(
+      ".about-services-description",
+      {
+        y: 20,
+        opacity: 0,
+        duration: 0.7,
+        ease: "power2.out",
+      },
+      "-=0.2",
+    )
+    .from(
+      ".about-services-link",
+      {
+        y: 15,
+        opacity: 0,
+        duration: 0.6,
+        ease: "power2.out",
+      },
+      "-=0.25",
+    );
+
+  gsap.utils.toArray<HTMLElement>(".about-service-item").forEach((item) => {
+    gsap.from(item, {
+      y: 35,
+      opacity: 0,
+      duration: 0.8,
+      ease: "power3.out",
+      scrollTrigger: {
+        trigger: item,
+        start: "top 88%",
+        toggleActions: "play none none reverse",
+      },
+    });
+  });
+}, []);
   const services = [
     {
       title: 'Websites with a purpose.',
@@ -116,60 +187,48 @@ export const BigPictureSection: React.FC = () => {
   ];
 
   return (
-    <section className="relative w-full bg-white dark:bg-black text-white py-24 px-6 sm:px-6 lg:px-6 overflow-hidden font-sans">
-      {/* Background Particle Canvas */}
+    <section className="about-services-section relative w-full bg-white dark:bg-zinc-900 text-white py-24 px-6 sm:px-6 lg:px-6 overflow-hidden font-sans">
+      
       <canvas
         ref={canvasRef}
         className="absolute inset-0 pointer-events-none z-0"
       />
 
       {/* Background Glow */}
-      <div className="absolute top-1/2 right-1/4 -translate-y-1/2 w-[550px] h-[350px] bg-white dark:bg-black rounded-full blur-[140px] pointer-events-none" />
+      <div className="absolute top-1/2 right-1/4 -translate-y-1/2 w-[550px] h-[350px] bg-white dark:bg-zinc-900 rounded-full blur-[140px] pointer-events-none" />
 
       <div className="max-w-9xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start relative z-10">
         {/* Left Column */}
         <div className="lg:col-span-5 flex flex-col items-start">
-          <span className="text-[11px] font-semibold tracking-[0.2em] uppercase text-gray-700 dark:text-gray-400 mb-6 block">
+          <span className="about-services-label text-[11px] font-semibold tracking-[0.2em] uppercase text-gray-700 dark:text-gray-400 mb-6 block">
             WHAT I BRING TO YOUR BUSINESS
           </span>
 
-          <h2 className="text-2xl sm:text-3xl lg:text-5xl font-semibold tracking-tight text-black dark:text-white mb-6 leading-[1.08]">
+          <h2 className="about-services-heading text-2xl sm:text-3xl lg:text-5xl font-semibold tracking-tight text-black dark:text-white mb-6 leading-[1.08]">
             The big picture. <br />
             The small details.
           </h2>
 
-          <p className="text-gray-700 dark:text-gray-400 text-sm sm:text-base leading-relaxed mb-8 max-w-md">
+          <p className="about-services-description text-gray-700 dark:text-gray-400 text-sm sm:text-base leading-relaxed mb-8 max-w-md">
             A thoughtful website is just the beginning. Benny connects the
             customer-facing experience with the tools that keep your business
             moving.
           </p>
 
-          <a
-            href="#services"
-            className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-medium text-black dark:text-white hover:text-green-300 transition-colors"
-          >
-            Explore our services
-            <ArrowUpRight className="w-4 h-4" />
-          </a>
+        
         </div>
 
         {/* Right Column: Services List */}
-        <div className="lg:col-span-7 flex flex-col divide-y divide-white/10">
+        <div className="	about-service-item lg:col-span-7 flex flex-col divide-y divide-white/10">
           {services.map((item, index) => (
-            <div key={index} className="py-8 first:pt-0 last:pb-0 flex flex-col items-start">
+            <div key={index} className="py-4 first:pt-0 last:pb-0 flex flex-col items-start">
               <h3 className="text-2xl sm:text-3xl font-semibold text-gray-800 dark:text-gray-200 mb-3">
                 {item.title}
               </h3>
               <p className="text-gray-700 dark:text-gray-400 text-sm sm:text-sm leading-relaxed mb-4 max-w-xl">
                 {item.description}
               </p>
-              <a
-                href={item.linkUrl}
-                className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-medium text-gray-800 dark:text-gray-300 hover:text-white transition-colors"
-              >
-                {item.linkText}
-                <ArrowUpRight className="w-3.5 h-3.5" />
-              </a>
+             
             </div>
           ))}
         </div>

@@ -36,7 +36,7 @@ const [activeTab, setActiveTab] = useState<number>(1);
   }
     return ( <>
      {/* Right Column: Multi-step Interactive Form Card */}
-            <div className="lg:col-span-7 bg-[#f3f1ec] text-gray-900 rounded-3xl p-6 sm:p-10 shadow-sm">
+            <div className="lg:col-span-7 bg-[#f3f1ec] text-gray-900 rounded-xl p-6 sm:p-10 shadow-sm">
               
               {/* Tabs Navigation Header */}
               <div className="grid grid-cols-3 gap-2 border-b border-gray-300/60 pb-4 mb-8">
@@ -284,7 +284,7 @@ const [activeTab, setActiveTab] = useState<number>(1);
                 <div className="flex justify-end pt-8">
                   <button
                     type="submit"
-                    className="inline-flex items-center gap-2 bg-[#94B49F]  text-white font-medium text-xs sm:text-sm px-6 py-3 rounded-xl hover:bg-[#94B49F] transition-colors shadow-lg"
+                    className="inline-flex items-center gap-2 bg-[#789982]  text-white font-medium text-xs sm:text-sm px-6 py-3 rounded-xl hover:bg-[#94B49F] transition-colors shadow-lg"
                   >
                     <span>{activeTab === 3 ? 'Submit Request' : 'Continue'}</span>
                     <ArrowRight className="w-3.5 h-3.5" />

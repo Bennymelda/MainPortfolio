@@ -2,3 +2,26 @@
 @import "tailwindcss";
 
 @custom-variant dark (&:where(.dark, .dark *));
+
+html,
+body,
+#root {
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  min-height: 100vh;
+  background-color: #ffffff;
+  color: #18181b;
+}
+
+html.dark,
+html.dark body {
+  background-color: #18181b;
+  color: #ffffff;
+}

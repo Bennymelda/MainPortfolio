@@ -1,6 +1,11 @@
 import React, { useState } from 'react';
 import { ArrowUpRight, Plus, X } from 'lucide-react';
 import { Link } from "react-router-dom";
+import { useGSAP } from "@gsap/react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(useGSAP, ScrollTrigger);
 export const WorkingTogetherSection: React.FC = () => {
   const [openIndex, setOpenIndex] = useState<number | null>(1); // Default second item open as shown in image
 
@@ -24,8 +29,36 @@ const faqs = [
 ];
 
 
+useGSAP(() => {
+  const tl = gsap.timeline({
+    scrollTrigger: {
+      trigger: ".working-together",
+      start: "top 50%",
+      toggleActions: "play none none reverse",
+    },
+  });
+
+  tl.from(".working-heading", {
+    y: 25,
+    opacity: 0,
+    duration: 0.7,
+    ease: "power2.out",
+  }).from(
+    ".working-faq",
+    {
+      y: 20,
+      opacity: 1,
+      duration: 0.6,
+      stagger: 0.15,
+      ease: "power2.out",
+    },
+    "-=0.3"
+  );
+}, []);
+
+
   return (
-    <section className="relative w-full bg-[#CEE5D0] text-white py-20 px-6 md:px-6 lg:px-6 overflow-hidden font-sans">
+    <section className="working-together relative w-full bg-[#CEE5D0] text-white py-20 px-6 md:px-6 lg:px-6 overflow-hidden font-sans">
       {/* Background Glow */}
       <div className="absolute top-1/2 right-1/4 w-[500px] h-[300px] bg-indigo-950/20 rounded-full blur-[140px] pointer-events-none" />
 
@@ -37,7 +70,7 @@ const faqs = [
     WORKING TOGETHER
   </span>
 
-  <h2 className="text-3xl text-black  sm:text-4xl lg:text-5xl font-semibold tracking-tight mb-6 leading-[1.1]">
+  <h2 className="working-heading text-3xl text-black  sm:text-4xl lg:text-5xl font-semibold tracking-tight mb-6 leading-[1.1]">
     Looking for a frontend developer?
   </h2>
 
@@ -62,7 +95,7 @@ const faqs = [
             return (
               <div
                 key={index}
-                className={`border rounded-xl transition-all duration-300 overflow-hidden ${
+                className={`working-faq border rounded-xl transition-all duration-300 overflow-hidden ${
                   isOpen
                     ? 'bg-white  border-zinc-200 '
                     : 'bg-white   border-zinc-200   hover:border-white/10'

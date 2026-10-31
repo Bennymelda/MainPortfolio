@@ -1,25 +1,28 @@
 import React from 'react';
 import { Eye, MousePointerClick, Smartphone, Gauge, MapPin, ShieldCheck, Check, ArrowUpRight } from 'lucide-react';
+import {Link} from "react-router-dom"
+import {useGSAP} from "@gsap/react"
+import gsap from 'gsap';
 
 export const ReviewCoversSection: React.FC = () => {
   const coverCards = [
     {
-      icon: <Eye className="w-5 h-5 text-gray-300" />,
+      icon: <Eye className="w-5 h-5 text-gray-700 dark:text-gray-300" />,
       title: "First impression",
       description: "What your homepage says you do, and whether someone new understands it in about five seconds."
     },
     {
-      icon: <MousePointerClick className="w-5 h-5 text-gray-300" />,
+      icon: <MousePointerClick className="w-5 h-5 text-gray-700 dark:text-gray-300" />,
       title: "The path to contact",
       description: "How easy it is to call, book, or send a message from any page — not just the contact page."
     },
     {
-      icon: <Smartphone className="w-5 h-5 text-gray-300" />,
+      icon: <Smartphone className="w-5 h-5 text-gray-700 dark:text-gray-300" />,
       title: "Phone experience",
       description: "How the site behaves on the screens most of your customers actually use, including tap targets."
     },
     {
-      icon: <Gauge className="w-5 h-5 text-gray-300" />,
+      icon: <Gauge className="w-5 h-5 text-gray-700 dark:text-gray-300 " />,
       title: "Speed",
       description: "What is slowing the page down, and which of those fixes are worth the effort."
     },
@@ -41,13 +44,107 @@ export const ReviewCoversSection: React.FC = () => {
     "Rough effort, so you know what is a quick win"
   ];
 
+
+
+useGSAP(() => {
+  gsap.from(".review-covers-header", {
+    y: 20,
+    opacity: 0,
+    duration: 0.7,
+    ease: "power2.out",
+    scrollTrigger: {
+      trigger: ".review-covers-section",
+      start: "top 75%",
+      toggleActions: "play none none reverse",
+    },
+  });
+
+  gsap.set(".review-cover-card", {
+  clearProps: "all",
+});
+
+gsap.fromTo(
+  ".review-cover-card",
+  {
+    y: 25,
+    autoAlpha: 0,
+  },
+  {
+    y: 0,
+    autoAlpha: 1,
+    duration: 0.6,
+    stagger: 0.12,
+    ease: "power2.out",
+    clearProps: "opacity,visibility,transform",
+    scrollTrigger: {
+      trigger: ".review-covers-grid",
+      start: "top 85%",
+      toggleActions: "play none none reverse",
+    },
+  }
+);
+  gsap.from(".review-covers-banner", {
+    y: 25,
+    opacity: 0,
+    duration: 0.7,
+    ease: "power2.out",
+    scrollTrigger: {
+      trigger: ".review-covers-banner",
+      start: "top 90%",
+      toggleActions: "play none none reverse",
+    },
+  });
+
+  gsap.from(".review-plan-bullet", {
+    x: 15,
+    opacity: 0,
+    duration: 0.5,
+    stagger: 0.12,
+    ease: "power2.out",
+    scrollTrigger: {
+      trigger: ".review-covers-banner",
+      start: "top 85%",
+      toggleActions: "play none none reverse",
+    },
+  });
+}, []);
+
+useGSAP(() => {
+  gsap.from(".how-it-works-left", {
+    y: 25,
+    opacity: 0,
+    duration: 0.7,
+    ease: "power2.out",
+    scrollTrigger: {
+      trigger: ".how-it-works-section",
+      start: "top 80%",
+      toggleActions: "play none none reverse",
+    },
+  });
+
+  gsap.from(".how-it-works-card", {
+    y: 20,
+    opacity: 0,
+    duration: 0.6,
+    stagger: 0.15,
+    ease: "power2.out",
+    scrollTrigger: {
+      trigger: ".how-it-works-cards",
+      start: "top 85%",
+      toggleActions: "play none none reverse",
+    },
+  });
+}, []);
+
+
+
   return (
     <>
-    <section className="w-full bg-white dark:bg-black text-black dark:text-white py-20 px-6 sm:px-6 lg:px-6 font-sans">
+    <section className="review-covers-section w-full bg-white dark:bg-zinc-900 text-black dark:text-white py-20 px-6 sm:px-6 lg:px-6 font-sans">
   <div className="max-w-9xl mx-auto">
 
     {/* Header Grid: Title Left, Subtext Right */}
-    <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-end mb-12">
+    <div className="review-covers-header grid grid-cols-1 lg:grid-cols-12 gap-8 items-end mb-12">
       <div className="lg:col-span-7">
         <h2 className="text-3xl sm:text-4xl lg:text-5xl font-semibold tracking-tight text-black dark:text-gray-300 leading-[1.1]">
           What the review covers.
@@ -62,11 +159,11 @@ export const ReviewCoversSection: React.FC = () => {
     </div>
 
     {/* 3x2 Cards Grid */}
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+    <div className="review-covers-grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
       {coverCards.map((card, index) => (
         <div
           key={index}
-          className="bg-white dark:bg-[#14111a] border border-gray-200 dark:border-white/10 rounded-xl p-4 flex flex-col justify-between hover:border-black/20 dark:hover:border-white/15 transition-all duration-300"
+          className="review-cover-card bg-white dark:bg-zinc-800 border border-gray-100 dark:border-white/5 rounded-xl p-4 flex flex-col justify-between hover:border-black/10 dark:hover:border-white/15 shadow-lg transition-all duration-300"
         >
           <div>
             <div className="w-5 h-5  rounded-xl flex items-center justify-center mb-4">
@@ -86,7 +183,7 @@ export const ReviewCoversSection: React.FC = () => {
     </div>
 
     {/* Bottom Banner Card */}
-    <div className="bg-[#f3f7f4] dark:bg-[#101b15] border border-none dark:border-emerald-950/60 rounded-2xl p-4 lg:p-4 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center shadow-sm">
+    <div className="review-covers-banner bg-[#f3f7f4] dark:bg-[#101b15] border border-none dark:border-emerald-950/60 rounded-2xl p-4 lg:p-4 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center shadow-sm">
 
       <div className="lg:col-span-7">
         <h3 className="text-xl sm:text-2xl font-semibold text-gray-900 dark:text-white mb-4">
@@ -101,7 +198,7 @@ export const ReviewCoversSection: React.FC = () => {
       <div className="lg:col-span-5 space-y-3 border-t lg:border-t-0 lg:border-l border-[#94B49F]/30 dark:border-emerald-900/40 pt-6 lg:pt-0 lg:pl-8">
 
         {planBullets.map((bullet, idx) => (
-          <div key={idx} className="flex items-start gap-3">
+          <div key={idx} className="review-plan-bullet flex items-start gap-3">
 
             <div className="w-5 h-5 rounded-full bg-[#94B49F]/20 dark:bg-emerald-900/40 flex items-center justify-center flex-shrink-0 mt-0.5">
               <Check className="w-3.5 h-3.5 text-[#5f806c] dark:text-emerald-400" />
@@ -121,56 +218,56 @@ export const ReviewCoversSection: React.FC = () => {
 </section>
 
 
-<section className="w-full bg-[#121118] text-white py-10 px-6 sm:px-6 lg:px-6 font-sans">
+<section className="how-it-works-section w-full bg-white dark:bg-[#121118] text-white py-10 px-6 sm:px-6 lg:px-6 font-sans">
       <div className="max-w-9xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
         
         {/* Left Column: Heading and Context */}
-        <div className="lg:col-span-6 flex flex-col justify-between h-full pr-0 lg:pr-8">
+        <div className="how-it-works-left lg:col-span-6 flex flex-col justify-between h-full pr-0 lg:pr-8">
           <div>
-            <h2 className="text-3xl sm:text-4xl lg:text-6xl font-semibold tracking-tight text-white mb-6">
+            <h2 className="text-3xl sm:text-4xl lg:text-6xl font-semibold tracking-tight text-black dark:text-white mb-6">
               How it works.
             </h2>
 
-            <p className="text-gray-400 text-sm sm:text-sm leading-relaxed mb-10 max-w-sm font-normal">
+            <p className="text-gray-700 dark:text-gray-400 text-sm sm:text-sm leading-relaxed mb-10 max-w-sm font-normal">
               You are dealing with me directly the whole way through — no account manager, no automated report, no follow-up calls you did not ask for.
             </p>
-            <a
-            href="#contact"
-            className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-semibold text-white hover:text-purple-300 transition-colors"
+            <Link
+            to="/contact"
+            className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-semibold text-black dark:text-white hover:text-green-900 transition-colors"
           >
             Rather talk it through first?
             <ArrowUpRight className="w-4 h-4" />
-          </a>
+          </Link>
           </div>
 
           
         </div>
 
         {/* Right Column: Step Cards */}
-        <div className="lg:col-span-6 flex flex-col gap-4">
+        <div className="how-it-works-cards lg:col-span-6 flex flex-col gap-4">
           
           {/* Card 1 */}
-          <div className="bg-[#1b1924] border border-white/5 rounded-lg p-2 sm:p-2 hover:border-white/10 transition-colors">
-            <h3 className="text-base sm:text-lg font-semibold text-white mb-1">
+          <div className="how-it-works-card bg-gray-100  dark:bg-zinc-800 border border-white/5 rounded-lg p-2 sm:p-4 hover:border-white/10 transition-colors">
+            <h3 className="text-base sm:text-lg font-semibold text-black dark:text-white mb-1">
               Send your website
             </h3>
-            <p className="text-gray-400 text-xs sm:text-xs leading-relaxed">
+            <p className="text-gray-700 dark:text-gray-400 text-xs sm:text-xs leading-relaxed">
               Fill in the form with your web address and what you would like the site to do for the business.
             </p>
           </div>
 
           {/* Card 2 */}
-          <div className="bg-[#1b1924] border ml-10 border-white/5 rounded-lg p-2 sm:p-2 hover:border-white/10 transition-colors">
-            <h3 className="text-base sm:text-lg font-semibold text-white mb-1">
+          <div className="how-it-works-card bg-gray-100 dark:bg-zinc-800 border ml-12 border-white/5 rounded-lg p-2 sm:p-4 hover:border-white/10 transition-colors">
+            <h3 className="text-base sm:text-lg font-semibold text-black dark:text-white mb-1">
               I go through it by hand
             </h3>
-            <p className="text-gray-400 text-xs sm:text-xs leading-relaxed">
+            <p className="text-gray-700 dark:text-gray-400 text-xs sm:text-xs leading-relaxed">
               No automated score sheet. I look at the pages your customers use, on desktop and on a phone.
             </p>
           </div>
 
           {/* Card 3 (Highlighted Green/Sage Accent) */}
-          <div className="bg-[#c2d3c7] ml-15 text-gray-900 rounded-lg p-2 sm:p-2 shadow-xl">
+          <div className="how-it-works-card bg-[#c2d3c7] ml-20 text-gray-900 rounded-md p-2 sm:p-6 shadow-sm">
             <h3 className="text-base sm:text-lg font-bold text-gray-900 ">
               You get a short plan
             </h3>

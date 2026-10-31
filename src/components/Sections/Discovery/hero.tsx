@@ -1,6 +1,8 @@
 import React, { useEffect, useRef } from 'react';
 import { ArrowDown, ArrowUpRight, Clock, Mail, Check, AlertTriangle, Search } from 'lucide-react';
-
+import {useGSAP} from "@gsap/react"
+import gsap from 'gsap';
+import { SplitText } from 'gsap/SplitText';
 export const FreeWebsiteReviewSection: React.FC = () => {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
 
@@ -52,8 +54,95 @@ export const FreeWebsiteReviewSection: React.FC = () => {
     };
   }, []);
 
+
+  useGSAP(() => {
+  const heading = new SplitText(".audit-hero-heading", {
+    type: "chars",
+  });
+
+  const tl = gsap.timeline({
+    scrollTrigger: {
+      trigger: ".audit-hero-section",
+      start: "top 75%",
+      toggleActions: "play none none reverse",
+    },
+  });
+
+  tl.from(".audit-hero-label", {
+    y: 15,
+    opacity: 0,
+    duration: 0.5,
+    ease: "power2.out",
+  })
+    .from(
+      heading.chars,
+      {
+        yPercent: 100,
+        opacity: 0,
+        duration: 0.7,
+        stagger: 0.025,
+        ease: "power3.out",
+      },
+      "-=0.15"
+    )
+    .from(
+      ".audit-hero-description",
+      {
+        y: 20,
+        opacity: 0,
+        duration: 0.6,
+        ease: "power2.out",
+      },
+      "-=0.2"
+    )
+    .from(
+      ".audit-hero-buttons",
+      {
+        y: 15,
+        opacity: 0,
+        duration: 0.6,
+        ease: "power2.out",
+      },
+      "-=0.2"
+    )
+    .from(
+      ".audit-hero-details",
+      {
+        y: 12,
+        opacity: 0,
+        duration: 0.5,
+        ease: "power2.out",
+      },
+      "-=0.15"
+    );
+
+  gsap.from(".audit-preview-card", {
+    y: 30,
+    opacity: 0,
+
+    duration: 1.9,
+    ease: "power3.out",
+    scrollTrigger: {
+      trigger: ".audit-hero-section",
+      start: "top 75%",
+      toggleActions: "play none none reverse",
+    },
+  });
+
+  gsap.from(".audit-fix-card", {
+    y: 20,
+    opacity: 0,
+    duration: 0.7,
+    ease: "power3.out",
+    scrollTrigger: {
+      trigger: ".audit-fix-card",
+      start: "top 90%",
+      toggleActions: "play none none reverse",
+    },
+  });
+}, []);
   return (
-    <section className="relative w-full bg-white dark:bg-black text-black dark:text-white py-20 px-6 sm:px-6 lg:px-6 overflow-hidden font-sans">
+    <section className="audit-hero-section relative w-full bg-white dark:bg-zinc-900 text-black dark:text-white py-20 px-6 sm:px-6 lg:px-6 overflow-hidden font-sans">
       <canvas
         ref={canvasRef}
         className="absolute inset-0 pointer-events-none z-0"
@@ -64,23 +153,23 @@ export const FreeWebsiteReviewSection: React.FC = () => {
       <div className="max-w-9xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 items-center relative z-10">
         
         {/* Left Column */}
-        <div className="lg:col-span-6 flex flex-col items-start">
-          <span className="text-[11px] font-semibold tracking-[0.2em] uppercase text-gray-700 dark:text-gray-400 mb-4 block">
+        <div className="audit-hero-left lg:col-span-6 flex flex-col items-start">
+          <span className="audit-hero-label text-[11px] font-semibold tracking-[0.2em] uppercase text-gray-700 dark:text-gray-400 mb-4 block">
             FREE WEBSITE REVIEW
           </span>
 
-          <h2 className="text-4xl sm:text-5xl lg:text-7xl font-semibold tracking-tight text-gray-800 dark:text-gray-300 mb-6 leading-[1.08]">
+          <h2 className="audit-hero-heading text-4xl sm:text-5xl lg:text-7xl font-semibold tracking-tight text-gray-800 dark:text-gray-300 mb-6 leading-[1.08]">
             Find out why your <br />
             website <br />
             isn't bringing <br />
             in calls.
           </h2>
 
-          <p className="text-gray-800 dark:text-gray-300 text-sm sm:text-base leading-relaxed mb-8 max-w-sm font-normal">
+          <p className="audit-hero-description text-gray-800 dark:text-gray-300 text-sm sm:text-base leading-relaxed mb-8 max-w-sm font-normal">
             Send me your website. I go through it by hand and send back a plain-English list of what is working, what is turning customers away, and what to fix first. No cost, no sales pitch.
           </p>
 
-          <div className="flex flex-wrap items-center gap-6 mb-12">
+          <div className="audit-hero-buttons flex flex-wrap items-center gap-6 mb-12">
             <a
               href="#audit-form"
               className="inline-flex items-center gap-2 bg-white text-black font-medium text-xs sm:text-sm px-5 py-3 rounded-md hover:bg-gray-100 transition-colors shadow-lg"
@@ -91,14 +180,14 @@ export const FreeWebsiteReviewSection: React.FC = () => {
 
             <a
               href="benny:benedictaibesi45@gmail.com"
-              className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-medium text-black dark:text-white hover:text-purple-300 transition-colors py-2"
+              className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-medium text-black dark:text-white hover:text-[#82A38D] transition-colors py-2"
             >
               Or email me your site
               <ArrowUpRight className="w-4 h-4" />
             </a>
           </div>
 
-          <div className="flex flex-wrap items-center gap-6 text-xs text-gray-700 dark:text-gray-400">
+          <div className="audit-hero-details flex flex-wrap items-center gap-6 text-xs text-gray-700 dark:text-gray-400">
             <div className="flex items-center gap-2">
               <Clock className="w-3.5 h-3.5 text-gray-700 dark:text-gray-400" />
               <span>Two minutes to request</span>
@@ -115,8 +204,8 @@ export const FreeWebsiteReviewSection: React.FC = () => {
         </div>
 
         {/* Right Column */}
-        <div className="lg:col-span-6 flex flex-col gap-4">
-          <div className="bg-[#12111a] border border-white/10 rounded-2xl p-4 sm:p-6 shadow-2xl relative overflow-hidden min-h-[280px]">
+        <div className="audit-hero-right lg:col-span-6 flex flex-col gap-4">
+          <div className="audit-preview-card bg-[#12111a] border border-white/10 rounded-2xl p-4 sm:p-6 shadow-2xl relative overflow-hidden min-h-[280px]">
             <div className="flex items-center gap-2 mb-6">
               <div className="flex gap-1.5">
                 <div className="w-2.5 h-2.5 rounded-full bg-gray-600/50" />
@@ -128,7 +217,7 @@ export const FreeWebsiteReviewSection: React.FC = () => {
               </div>
             </div>
 
-            <div className="space-y-4 relative pt-2">
+            <div className=" space-y-4 relative pt-2">
               <div className="relative">
                 <div className="h-6 bg-gray-800/60 rounded-md w-full" />
                 <div className="absolute right-0 -top-2 bg-[#191924] border border-gray-700/80 rounded-md px-2.5 py-1 text-[10px] text-gray-200 flex items-center gap-1.5 shadow-lg">
@@ -161,7 +250,7 @@ export const FreeWebsiteReviewSection: React.FC = () => {
             </div>
           </div>
 
-          <div className="bg-[#122019] border border-emerald-900/50 rounded-2xl p-5 sm:p-6 shadow-xl">
+          <div className="audit-fix-card bg-[#122019] border border-emerald-900/50 rounded-2xl p-5 sm:p-6 shadow-xl">
             <span className="text-[10px] font-bold tracking-[0.2em] text-emerald-400 uppercase mb-3 block">
               FIX FIRST
             </span>

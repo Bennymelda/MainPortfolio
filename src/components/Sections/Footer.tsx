@@ -1,10 +1,10 @@
 import React from 'react';
 import { ArrowUpRight, MessageSquare } from 'lucide-react';
-
+import {Link} from "react-router-dom"
 export const FooterSection: React.FC = () => {
   return (
-    <footer className="w-full bg-gray-100 dark:bg-zinc-900 text-white pt-16 pb-12 px-6 md:px-12 lg:px-20 border-t border-white/10 font-sans relative">
-      <div className="max-w-7xl mx-auto">
+    <footer className="w-full bg-gray-100 dark:bg-[#14111a] text-white pt-16 pb-12 px-6 md:px-12 lg:px-20 border-t border-white/10 font-sans relative">
+      <div className="max-w-8xl mx-auto">
         {/* Main Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 lg:gap-8 pb-16">
           
@@ -12,31 +12,34 @@ export const FooterSection: React.FC = () => {
           <div className="lg:col-span-2 flex flex-col justify-between pr-0 lg:pr-8">
             <div>
               {/* Logo */}
-              <div className="flex items-center gap-2.5 mb-6">
-                <div className="w-7 h-7 rounded-full bg-gradient-to-tr from-indigo-600 to-purple-500 flex items-center justify-center text-white font-bold text-xs shadow-md">
-                  J
-                </div>
-                <span className="font-bold tracking-wider text-sm text-white">
-                  JUNCIE STUDIOS
-                </span>
-              </div>
+              {/* Logo */}
+<div className="flex items-center gap-2.5 mb-6">
+  <div className="w-7 h-7 rounded-full bg-[#82A38D] flex items-center justify-center text-black font-bold text-xs shadow-md">
+    B
+  </div>
+
+  <span className="font-bold tracking-wider text-sm text-black dark:text-white">
+    BENNY IBESI
+  </span>
+</div>
 
               {/* Tagline */}
-              <p className="text-gray-700 dark:text-gray-400 text-xs sm:text-sm font-mono leading-relaxed mb-8 max-w-xs">
-                Websites and workplace automations for Arizona businesses.
-              </p>
+             <p className="text-gray-700 dark:text-gray-300 text-xs sm:text-sm font-mono leading-relaxed mb-8 max-w-xs">
+  I build websites and web applications that turn attention into action.
+</p>
             </div>
 
             {/* Address & Email */}
-            <div className="space-y-1.5 text-xs text-gray-700 dark:text-gray-400 font-mono">
-              <p>Mesa, AZ 85212</p>
-              <a
-                href="mailto:benedictaibesi45@gmail.com"
-                className="hover:text-black dark:hover:text-white transition-colors inline-block"
-              >
-                benedictaibesi45@gmail.com
-              </a>
-            </div>
+            <div className="space-y-1.5 text-xs text-gray-700 dark:text-gray-300 font-mono">
+  <p>Nigeria · Available Worldwide</p>
+
+  <a
+    href="mailto:benedictaibesi45@gmail.com"
+    className="hover:text-black dark:hover:text-white transition-colors inline-block"
+  >
+    benedictaibesi45@gmail.com
+  </a>
+</div>
           </div>
 
           {/* Column 1: Explore */}
@@ -45,16 +48,17 @@ export const FooterSection: React.FC = () => {
               EXPLORE
             </h4>
             <ul className="space-y-3 text-xs text-gray-800 dark:text-gray-300 font-medium">
-              <li><a href="#services" className="hover:text-black dark:hover:text-white transition-colors">Services</a></li>
-              <li><a href="#locations" className="hover:text-black dark:hover:text-white transition-colors">Locations</a></li>
-              <li><a href="#work" className="hover:text-black dark:hover:text-white transition-colors">Work</a></li>
-              <li><a href="#blog" className="hover:text-black dark:hover:text-white transition-colors">Blog</a></li>
-              <li><a href="#about" className="hover:text-black dark:hover:text-white transition-colors">About</a></li>
-              <li><a href="#contact" className="hover:text-black dark:hover:text-white transition-colors">Contact</a></li>
-              <li><a href="#experience" className="hover:text-black dark:hover:text-white transition-colors">Experience</a></li>
-              <li><a href="#audit" className="hover:text-black dark:hover:text-white transition-colors">Free website audit</a></li>
-              <li><a href="#concept" className="hover:text-black dark:hover:text-white transition-colors">Free homepage concept</a></li>
-              <li><a href="#privacy" className="hover:text-black dark:hover:text-white transition-colors">Privacy Policy</a></li>
+
+              <li><Link to="/work" className="hover:text-black dark:hover:text-[#94B49F] transition-colors">Work</Link></li>
+              <li><Link to="/about" className="hover:text-black dark:hover:text-[#94B49F] transition-colors">About</Link></li>
+              <li><Link to="/contact" className="hover:text-black dark:hover:text-[#94B49F] transition-colors">Contact</Link></li>
+              <li><Link to="/discovery" className="hover:text-black dark:hover:text-[#94B49F] transition-colors">Free website audit</Link></li>
+              <a
+  href="/discovery#audit-form"
+  className="hover:text-black dark:hover:text-[#94B49F] transition-colors"
+>
+  Free homepage concept
+</a>
             </ul>
           </div>
 
@@ -64,38 +68,65 @@ export const FooterSection: React.FC = () => {
               SERVICES
             </h4>
             <ul className="space-y-3 text-xs text-gray-800 dark:text-gray-300 font-medium">
-              <li><a href="#e-commerce" className="hover:text-black dark:hover:text-white transition-colors">E-commerce</a></li>
-              <li><a href="#web-design" className="hover:text-black dark:hover:text-white transition-colors">Web Design</a></li>
-              <li><a href="#graphic-design" className="hover:text-black dark:hover:text-white transition-colors">Graphic Design</a></li>
-              <li><a href="#app-dev" className="hover:text-black dark:hover:text-white transition-colors">App Development</a></li>
-              <li><a href="#web-dev" className="hover:text-black dark:hover:text-white transition-colors">Web Development</a></li>
-              <li><a href="#seo" className="hover:text-black dark:hover:text-white transition-colors">SEO</a></li>
+              <li  className="hover:text-black dark:hover:text-[#94B49F] transition-colors">E-commerce</li>
+              <li className="hover:text-black dark:hover:text-[#94B49F] transition-colors">Web Design</li>
+              <li className="hover:text-black dark:hover:text-[#94B49F] transition-colors">Web Development</li>
+              <li className="hover:text-black dark:hover:text-[#94B49F] transition-colors">SASS</li>
               <li>
-                <a href="#all-services" className="inline-flex items-center gap-1 text-black dark:text-white hover:text-[#94B49F] transition-colors pt-1">
-                  All services<ArrowUpRight className="w-3 h-3" />
-                </a>
               </li>
             </ul>
           </div>
 
-          {/* Column 3: Arizona & Beyond */}
-          <div>
-            <h4 className="text-[10px] font-bold tracking-[0.2em] text-gray-700 dark:text-gray-400 uppercase mb-5">
-              ARIZONA &amp; BEYOND
-            </h4>
-            <ul className="space-y-3 text-xs text-gray-800 dark:text-gray-300 font-medium">
-              <li><a href="#mesa" className="hover:text-black dark:hover:text-white transition-colors">Mesa</a></li>
-              <li><a href="#scottsdale" className="hover:text-black dark:hover:text-white transition-colors">Scottsdale</a></li>
-              <li><a href="#tempe" className="hover:text-black dark:hover:text-white transition-colors">Tempe</a></li>
-              <li><a href="#chandler" className="hover:text-black dark:hover:text-white transition-colors">Chandler</a></li>
-              <li><a href="#gilbert" className="hover:text-black dark:hover:text-white transition-colors">Gilbert</a></li>
-              <li>
-                <a href="#all-areas" className="inline-flex items-center gap-1 text-black dark:text-white hover:text-[#94B49F] transition-colors pt-1">
-                  All service areas <ArrowUpRight className="w-3 h-3" />
-                </a>
-              </li>
-            </ul>
-          </div>
+          
+{/* Column 3: Connect */}
+<div>
+  <h4 className="text-[10px] font-bold tracking-[0.2em] text-gray-700 dark:text-gray-400 uppercase mb-5">
+    CONNECT
+  </h4>
+
+  <ul className="space-y-3 text-xs text-gray-800 dark:text-gray-300 font-medium">
+    <li>
+      <a
+        href="https://www.linkedin.com/in/benny-ibesi"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="hover:text-[#94B49F] transition-colors"
+      >
+        LinkedIn
+      </a>
+    </li>
+
+    <li>
+      <a
+        href="https://github.com/Bennymelda"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="hover:text-[#94B49F] transition-colors"
+      >
+        GitHub
+      </a>
+    </li>
+
+    <li>
+      <a
+        href="mailto:benedictaibesi45@gmail.com"
+        className="hover:text-[#94B49F] transition-colors"
+      >
+        Email me
+      </a>
+    </li>
+
+    <li>
+      <a
+        href="/contact"
+        className="inline-flex items-center gap-1 text-black dark:text-white hover:text-[#94B49F] transition-colors pt-1"
+      >
+        Let's talk <ArrowUpRight className="w-3 h-3" />
+      </a>
+    </li>
+  </ul>
+</div>
+
 
         </div>
 
@@ -107,14 +138,14 @@ export const FooterSection: React.FC = () => {
 
       {/* Floating CTA Badge Button (Bottom Right) */}
       <div className="fixed bottom-6 right-6 z-50">
-        <a
-          href="#contact"
-          className="inline-flex items-center gap-2 bg-[#f3f1ec] text-gray-700 dark:text-gray-900 text-xs font-semibold px-4 py-2.5 rounded-full shadow-2xl hover:bg-black dark:hover:bg-white transition-all transform hover:scale-105 border border-gray-200"
+        <Link
+          to="/contact"
+          className="inline-flex items-center gap-2 bg-[#f3f1ec] text-gray-700 dark:text-gray-900 text-xs font-semibold px-4 py-2.5 rounded-full shadow-2xl hover:bg-zinc-900 dark:hover:bg-white transition-all transform hover:scale-105 border border-gray-200"
         >
           <MessageSquare className="w-3.5 h-3.5" />
           <span>Start a project</span>
           <ArrowUpRight className="w-3.5 h-3.5" />
-        </a>
+        </Link>
       </div>
     </footer>
   );

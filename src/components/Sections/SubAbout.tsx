@@ -1,7 +1,11 @@
 import React, { useEffect, useRef } from 'react';
 import { ArrowUpRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { useGSAP } from "@gsap/react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 
+gsap.registerPlugin(useGSAP, ScrollTrigger);
 export const AboutSection: React.FC = () => {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
 
@@ -104,8 +108,57 @@ export const AboutSection: React.FC = () => {
   };
 }, []);
 
+
+
+useGSAP(() => {
+  const tl = gsap.timeline({
+    scrollTrigger: {
+      trigger: ".about-section",
+      start: "top 60%",
+      toggleActions: "play none none reverse",
+    },
+  });
+
+  tl.from(".about-image", {
+    x: -60,
+    opacity: 0,
+    duration: 1,
+    ease: "power3.out",
+  })
+    .from(
+      ".about-heading",
+      {
+        y: 35,
+        opacity: 0,
+        duration: 0.8,
+        ease: "power3.out",
+      },
+      "-=0.5"
+    )
+    .from(
+      ".about-description",
+      {
+        y: 25,
+        opacity: 0,
+        duration: 0.8,
+        ease: "power3.out",
+      },
+      "-=0.4"
+    )
+    .from(
+      ".about-button",
+      {
+        y: 20,
+        opacity: 0,
+        duration: 0.7,
+        ease: "power3.out",
+      },
+      "-=0.3"
+    );
+}, []);
+
   return (
-  <section className="relative w-full min-h-[550px] bg-white dark:bg-black text-black dark:text-white flex items-center justify-center overflow-hidden px-6 py-20 font-sans">
+  <section className="about-section relative w-full min-h-[550px] bg-white dark:bg-zinc-900 text-black dark:text-white flex items-center justify-center overflow-hidden px-6 py-20 font-sans">
 
     {/* Background Particle Canvas
     <canvas
@@ -120,9 +173,9 @@ export const AboutSection: React.FC = () => {
     <div className="relative z-10 max-w-5xl w-full mx-auto flex flex-col md:flex-row items-center gap-10 md:gap-14">
 
       {/* Profile Image Card */}
-      <div className="relative flex-shrink-0 w-64 h-80 sm:w-72 sm:h-96 md:w-80 md:h-[380px] rounded-xl overflow-hidden shadow-2xl border border-black/10 dark:border-white/10">
+      <div className="about-image  relative flex-shrink-0 w-64 h-80 sm:w-72 sm:h-96 md:w-80 md:h-[380px] rounded-xl overflow-hidden  ">
         <img
-          src="./main-picture.png?auto=format&fit=crop&q=80&w=800"
+          src="./profile-removebg-preview.png"
           alt="Brandon Mitchell"
           className="w-full h-full object-cover object-center"
         />
@@ -132,11 +185,11 @@ export const AboutSection: React.FC = () => {
 {/* Text Content */}
 <div className="flex flex-col items-start max-w-xl">
 
-  <h2 className="text-4xl sm:text-5xl lg:text-6xl font-semibold tracking-tight text-black dark:text-white mb-6">
+  <h2 className="about-heading text-4xl sm:text-5xl lg:text-6xl font-semibold tracking-tight text-black dark:text-white mb-6">
     Hey, I'm Benny.
   </h2>
 
-  <p className="text-gray-600 dark:text-gray-300 text-sm sm:text-base leading-relaxed mb-8 font-light max-w-sm">
+  <p className="about-description text-gray-600 dark:text-gray-300 text-sm sm:text-base leading-relaxed mb-8 font-light max-w-sm">
     I'm a frontend developer who turns ideas into real products people
     can actually use. I build fast, responsive, conversion-focused
     websites and web applications designed to make businesses easier
@@ -145,7 +198,7 @@ export const AboutSection: React.FC = () => {
 
   <Link
     to="/contact"
-    className="inline-flex items-center gap-2 bg-[#94B49F] text-black font-semibold text-xs sm:text-sm px-5 py-2.5 rounded-lg hover:bg-[#839f8d] transition-colors shadow-md"
+    className="about-button inline-flex items-center gap-2 bg-[#94B49F] text-black font-semibold text-xs sm:text-sm px-5 py-2.5 rounded-lg hover:bg-[#839f8d] transition-colors shadow-md"
   >
     Start a project
     <ArrowUpRight className="w-4 h-4" />

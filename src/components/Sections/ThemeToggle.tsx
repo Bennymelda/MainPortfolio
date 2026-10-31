@@ -19,14 +19,10 @@ export default function ThemeToggle() {
   return (
     <button
       onClick={() => setDarkMode(!darkMode)}
-      className="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-white/10"
+      className="p-2 rounded-lg hover:bg-gray-100 border border-gray-200 dark:border-gray-200 px-2 py-1 dark:hover:bg-white/10"
       aria-label="Toggle theme"
     >
-      {darkMode ? (
-        <Sun className="w-5 h-5" />
-      ) : (
-        <Moon className="w-5 h-5" />
-      )}
+      {darkMode ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
     </button>
   );
 }

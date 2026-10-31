@@ -1,6 +1,9 @@
 import React, { useEffect, useRef } from 'react';
 import { ArrowUpRight, ArrowDown } from 'lucide-react';
 import { Link } from "react-router-dom";
+import {useGSAP} from "@gsap/react"
+import gsap from 'gsap';
+import { SplitText } from 'gsap/SplitText';
 export const HeroSection: React.FC = () => {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
 
@@ -93,8 +96,58 @@ export const HeroSection: React.FC = () => {
     };
   }, []);
 
+useGSAP(() => {
+  const heroHeading = new SplitText(".heading", {
+    type: "lines",
+  });
+const taglineText = new SplitText(".title", {
+  type: "chars",
+});
+  const paragraphText = new SplitText(".subtitle", {
+    type: "lines",
+  });
+
+  const tl = gsap.timeline({
+    defaults: {
+      ease: "expo.out",
+    },
+  });
+
+  tl.from(taglineText.chars, {
+  yPercent: 100,
+  opacity: 0,
+  duration: 0.5,
+  stagger: 0.06,
+}).from(heroHeading.lines, {
+    yPercent: 100,
+    opacity: 0,
+    duration: 1.5,
+    stagger: 0.6,
+  })
+    .from(
+      paragraphText.lines,
+      {
+        y: 25,
+        opacity: 0,
+        duration: 1,
+        stagger: 0.15,
+      },
+      "-=0.3"
+    )
+    .from(
+      ".hero-buttons a",
+      {
+        y: 20,
+        opacity: 0,
+        duration: 1,
+        stagger: 0.2,
+      },
+      "-=0.2"
+    );
+}, []);
+
  return (
-  <section className="relative w-full min-h-screen bg-white dark:bg-zinc-900 text-white flex flex-col justify-between overflow-hidden px-6 md:px-6 lg:px-6 py-12 select-none">
+  <section className="relative w-full min-h-screen bg-white dark:bg-zinc-900 text-white flex flex-col justify-between overflow-hidden px-6 md:px-6 lg:px-6 pt-24 pb-12 select-none">
     {/* Background Interactive Canvas */}
     <canvas
       ref={canvasRef}
@@ -107,25 +160,25 @@ export const HeroSection: React.FC = () => {
 
     {/* Top Tagline */}
     <div className="relative z-10 pt-4">
-      <span className="text-[11px] font-semibold tracking-[0.2em] uppercase text-gray-800 dark:text-gray-300">
+      <span className="title text-[11px] font-semibold tracking-[0.2em] uppercase text-gray-800 dark:text-gray-300">
         FRONTEND DEVELOPER
       </span>
     </div>
 
     {/* Hero Content */}
     <div className="relative z-10 max-w-3xl my-auto py-12">
-      <h1 className="text-5xl sm:text-6xl md:text-6xl lg:text-8xl font-bold tracking-tight leading-[1.05] mb-8 text-black dark:text-white">
+      <h1 className="heading text-5xl sm:text-6xl md:text-6xl lg:text-8xl font-bold tracking-tight leading-[1.05] mb-8 text-black dark:text-white">
         I turn ideas into <br />
         <span className="text-[#94B49F]">real products.</span>
       </h1>
 
-      <p className="text-gray-800 dark:text-gray-400 text-sm sm:text-base md:text-base max-w-sm leading-relaxed mb-10 font-normal">
+      <p className="subtitle text-gray-800 dark:text-gray-400 text-sm sm:text-base md:text-base max-w-sm leading-relaxed mb-10 font-normal">
   I build conversion-focused websites and web applications that help
   businesses turn attention into trust, and trust into action.
 </p>
 
       {/* Action Buttons */}
-      <div className="flex flex-wrap items-center gap-6">
+      <div className="hero-buttons flex flex-wrap items-center gap-6">
         <Link
           to="/contact"
           className="inline-flex items-center gap-2 bg-[#94B49F] text-black font-medium text-sm px-4 py-2 rounded-md hover:bg-[#839f8d] transition-colors shadow-lg shadow-white/5"

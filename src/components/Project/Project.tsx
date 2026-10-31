@@ -1,48 +1,66 @@
 
 import { ArrowUpRight } from 'lucide-react';
+import { useGSAP } from '@gsap/react';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { SplitText } from 'gsap/SplitText';
+import { projects } from './Project';
+import { useNavigate } from 'react-router-dom';
+gsap.registerPlugin(useGSAP, ScrollTrigger, SplitText);
+interface SelectedWorkSectionProps {
+  isMainProjectPage?: boolean;
+}
 
-export const SelectedWorkSection: React.FC = () => {
 
-  const projects = [
-    {
-      title: 'TiempOS',
-      category: 'Web design / Full-stack development / Automation',
-      image: 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&q=80&w=1400',
-      tag: 'SaaS',
-      featured: true,
+export const SelectedWorkSection: React.FC<SelectedWorkSectionProps>  = ({
+  isMainProjectPage = false,
+}) => {
+
+  
+const navigate = useNavigate();
+
+useGSAP(() => {
+  const heading = new SplitText(".work-heading", {
+    type: "chars",
+  });
+
+  const tl = gsap.timeline({
+    scrollTrigger: {
+      trigger: "#selected-work",
+      start: "top 75%",
+      toggleActions: "play none none reverse",
     },
+  });
+
+  tl.from(heading.chars, {
+    yPercent: 100,
+    opacity: 0,
+    duration: 0.8,
+    stagger: 0.04,
+    ease: "power3.out",
+  }).from(
+    ".work-project",
     {
-      title: 'Dobson Ranch Golf Course',
-      category: 'Website / Booking experience / Local search',
-      image: 'https://images.unsplash.com/photo-1535131749006-b7f58c99034b?auto=format&fit=crop&q=80&w=800',
-      tag: 'Local business',
-      featured: false,
+      y: 60,
+      opacity: 0,
+      duration: 0.8,
+      stagger: 0.5,
+      ease: "power3.out",
     },
-    {
-      title: 'Bali Hai Golf Club',
-      category: 'Web design / Ecommerce',
-      image: 'https://images.unsplash.com/photo-1587174486073-ae5e5cff23aa?auto=format&fit=crop&q=80&w=800',
-      tag: 'Local business, ecommerce',
-      featured: false,
-    },
-    {
-      title: 'ProPlaintiff.ai',
-      category: 'Full-stack engineering / Integrations',
-      image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=800',
-      tag: 'SaaS, enterprise AI',
-      featured: false,
-    },
-    {
-      title: 'Palm Beach National',
-      category: 'Web design / Ecommerce',
-      image: 'https://images.unsplash.com/photo-1534447677768-be436bb09401?auto=format&fit=crop&q=80&w=800',
-      tag: 'Local business, ecommerce',
-      featured: false,
-    },
-  ];
+    "-=0.4"
+  );
+}, []);
+
 
   return (
-    <section className="w-full bg-[#f3f1ec] text-gray-900 py-20 px-6 sm:px-6 lg:px-6 font-sans">
+    <section
+     id="selected-work"
+       className={`w-full  text-gray-900 py-20 px-6 sm:px-6 lg:px-6 font-sans ${
+        isMainProjectPage
+          ? 'bg-white dark:bg-zinc-900'
+          : 'bg-[#f3f1ec] dark:bg-[#f3f1ec]'
+      }`}
+     >
       <div className="max-w-8xl mx-auto">
         
         {/* Header & Filter Controls */}
@@ -51,8 +69,14 @@ export const SelectedWorkSection: React.FC = () => {
             <span className="text-[11px] font-semibold tracking-[0.2em] uppercase text-gray-500 mb-3 block">
               A VIEW OF THE WORK WE DO
             </span>
-            <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-gray-900">
-              Selected work.
+            <h2 
+            className={`work-heading text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight ${
+        isMainProjectPage
+          ? 'text-black dark:text-white'
+          : 'text-gray-900'
+      }`}
+          >
+              All work.
             </h2>
           </div>
 
@@ -74,8 +98,14 @@ export const SelectedWorkSection: React.FC = () => {
         {/* 2-Column Grid for Remaining Projects */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
           {projects.filter(p => !p.featured).map((project, idx) => (
-            <div key={idx} className="flex flex-col group cursor-pointer">
-              <div className="relative rounded-xl overflow-hidden bg-black aspect-[16/10] shadow-lg ">
+            <div key={idx}
+             onClick={() =>
+    navigate(
+      `/projects/${project.title.toLowerCase().replace(/\s+/g, '-')}`
+    )
+  }
+             className="work-project flex flex-col group cursor-pointer">
+              <div className="relative rounded-xl overflow-hidden bg-zinc-900 aspect-[16/10] shadow-lg ">
                 <img
                   src={project.image}
                   alt={project.title}
@@ -87,15 +117,27 @@ export const SelectedWorkSection: React.FC = () => {
               </div>
               <div className="flex items-start justify-between mt-2">
                 <div>
-                  <h3 className="text-xl sm:text-2xl font-bold text-gray-900 group-hover:text-[#94B49F] transition-colors">
+                  <h3 
+                   className={`text-xl sm:text-2xl font-bold  group-hover:text-[#94B49F] transition-colors ${
+        isMainProjectPage
+          ? 'text-black dark:text-white'
+          : 'text-gray-900'
+      }`}
+                  >
                     {project.title}
                   </h3>
-                  <p className="text-xs sm:text-sm text-gray-600 mt-1">
+                  <p 
+                     className={`text-xs sm:text-sm mt-1${
+        isMainProjectPage
+          ? 'text-zinc-400 dark:text-zinc-400'
+          : 'text-gray-600'
+      }`}
+                  >
                     {project.category}
                   </p>
                 </div>
                 <div className="w-12 h-12 rounded-full  flex items-center justify-center group-hover:bg-[#94B49F] group-hover:text-white transition-colors flex-shrink-0">
-                  <ArrowUpRight className="w-5 h-5" />
+                  <ArrowUpRight className="w-5 h-5 dark:text-white" />
                 </div>
               </div>
             </div>

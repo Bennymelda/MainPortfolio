@@ -3,12 +3,124 @@ import { ArrowUpRight, Mail } from 'lucide-react';
 import {Scan, Sparkles } from 'lucide-react';
 import Form from '../Sections/Form';
 import FooterSection from '../Sections/Footer';
+import { useGSAP } from "@gsap/react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { SplitText } from "gsap/SplitText";
+
+gsap.registerPlugin(useGSAP, ScrollTrigger, SplitText);
 export const LetUsTalkSection: React.FC = () => {
 
+useGSAP(() => {
+  const heading = new SplitText(".contact-heading", {
+    type: "chars",
+  });
 
+  const tl = gsap.timeline({
+    scrollTrigger: {
+      trigger: ".contact-section",
+      start: "top 40%",
+      toggleActions: "play none none reverse",
+    },
+  });
+
+  tl.from(heading.chars, {
+    yPercent: 100,
+    opacity: 0,
+    duration: 0.7,
+    stagger: 0.035,
+    ease: "power3.out",
+  })
+    .from(
+      ".contact-description",
+      {
+        y: 15,
+        opacity: 0,
+        duration: 0.6,
+        ease: "power2.out",
+      },
+      "-=0.2"
+    )
+    .from(
+      ".contact-profile",
+      {
+        y: 15,
+        opacity: 0,
+        duration: 0.5,
+        ease: "power2.out",
+      },
+      "-=0.2"
+    )
+    .from(
+      ".contact-email",
+      {
+        y: 15,
+        opacity: 0,
+        duration: 0.5,
+        ease: "power2.out",
+      },
+      "-=0.2"
+    )
+    .from(
+      ".contact-footnote",
+      {
+        y: 15,
+        opacity: 0,
+        duration: 0.5,
+        ease: "power2.out",
+      },
+      "-=0.2"
+    )
+    .from(
+      ".contact-form",
+      {
+        y: 30,
+        opacity: 0,
+        duration: 0.9,
+        ease: "power3.out",
+      },
+      "-=0.6"
+    )
+}, []);
+
+useGSAP(() => {
+  const heading = new SplitText(".starting-heading", {
+    type: "chars",
+  });
+
+  gsap.from(heading.chars, {
+    yPercent: 100,
+    opacity: 0,
+    duration: 0.7,
+    stagger: 0.035,
+    ease: "power3.out",
+    scrollTrigger: {
+      trigger: ".starting-section",
+      start: "top 75%",
+      toggleActions: "play none none reverse",
+    },
+  });
+
+  gsap.utils.toArray<HTMLElement>([
+    ".starting-card-1",
+    ".starting-card-2",
+  ]).forEach((card) => {
+    gsap.from(card, {
+      y: 40,
+      opacity: 0,
+      duration: 0.8,
+      ease: "power3.out",
+      scrollTrigger: {
+        trigger: card,
+        start: "top 90%",
+        toggleActions: "play none none reverse",
+      },
+    });
+  });
+}, []);
   return (
     <>
-    <section className="w-full bg-white dark:bg-black text-black dark:text-white py-20 px-6 sm:px-6 lg:px-6 font-sans">
+    <section className="contact-section w-full bg-white dark:bg-zinc-900 text-black dark:text-white py-20 px-6 sm:px-6 lg:px-6 font-sans">
       <div className="max-w-9xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
         
         {/* Left Column: Heading, Bio, and Email */}
@@ -18,21 +130,21 @@ export const LetUsTalkSection: React.FC = () => {
               LET'S TALK
             </span>
 
-            <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-black dark:text-white mb-6 leading-[1.08]">
+            <h2 className="contact-heading text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-black dark:text-white mb-6 leading-[1.08]">
               Good things start <br />
               with a <span className="text-[#94B49F]">conversation.</span>
             </h2>
 
-            <p className="text-gray-700 dark:text-gray-300 text-sm sm:text-base leading-relaxed mb-10 max-w-lg">
+            <p className="contact-description text-gray-700 dark:text-gray-300 text-sm sm:text-base leading-relaxed mb-10 max-w-lg">
               A new website, a better online store, or a little less busywork. Tell me what’s on your mind, and we'll work out the next step.
             </p>
 
             {/* Author Profile Card */}
-            <div className="flex items-center gap-4 mb-10">
+            <div className="contact-profile flex items-center gap-4 mb-10">
               <img
-                src="./main-picture.png?auto=format&fit=crop&q=80&w=200"
+                src="./profile-removebg-preview.png?auto=format&fit=crop&q=80&w=200"
                 alt="Brandon Mitchell"
-                className="w-14 h-14 rounded-full object-cover border border-white/20 flex-shrink-0"
+                className="w-14 h-14 rounded-full object-cover  flex-shrink-0"
               />
               <div>
                 <h4 className="text-sm font-bold text-white mb-0.5">Benedicta Ibesi</h4>
@@ -44,14 +156,14 @@ export const LetUsTalkSection: React.FC = () => {
             </div>
 
             {/* Email Contact Box */}
-            <div className="pt-4 border-t border-white/10 mb-4 ">
+            <div className="contact-email pt-4 border-t border-white/10 mb-4 ">
               <div className="flex items-center gap-2 text-xs text-gray-800 dark:text-gray-400 mb-1">
                 <Mail className="w-3.5 h-3.5" />
                 <span>Prefer email?</span>
               </div>
               <a
                 href="mailto:benedictaibesi45@gmail.com"
-                className="inline-flex items-center gap-1.5 text-sm font-medium text-black dark:text-white hover:text-purple-300 transition-colors"
+                className="inline-flex items-center gap-1.5 text-sm font-medium text-black dark:text-white hover:text-[#94B49F] transition-colors"
               >
                 benedictaibesi45@gmail.com <ArrowUpRight className="w-3.5 h-3.5" />
               </a>
@@ -59,7 +171,7 @@ export const LetUsTalkSection: React.FC = () => {
           </div>
 
           {/* What Happens Next Footnote */}
-          <div className="pt-4 border-t border-white/10">
+          <div className="contact-footnote  pt-4 border-t border-white/10">
             <h4 className="text-xs font-bold uppercase tracking-wider text-black dark:text-white mb-1">
               What happens next?
             </h4>
@@ -70,15 +182,15 @@ export const LetUsTalkSection: React.FC = () => {
         </div>
 
         {/* Right Column: Contact Form */}
-        <div className="lg:col-span-6  ">
-          <Form />
-        </div>
+       <div className="contact-form lg:col-span-6">
+  <Form />
+</div>
 
       </div>
     </section>
 
 
-<section className="w-full bg-[#f4f2eb] text-gray-900 py-10 px-6 sm:px-6 lg:px-6 font-sans">
+<section className="starting-section w-full bg-[#f4f2eb] text-gray-900 py-10 px-6 sm:px-6 lg:px-6 font-sans">
       <div className="max-w-9xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
         
         {/* Left Column: Title & Subtitle */}
@@ -87,7 +199,7 @@ export const LetUsTalkSection: React.FC = () => {
             A PLACE TO START
           </span>
 
-          <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-gray-900 mb-4 leading-[1.08]">
+          <h2 className="starting-heading text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-gray-900 mb-4 leading-[1.08]">
             Still figuring <br />
             things out?
           </h2>
@@ -101,7 +213,7 @@ export const LetUsTalkSection: React.FC = () => {
         <div className="lg:col-span-8 grid grid-cols-1 md:grid-cols-2 gap-6">
           
           {/* Card 1: Green/Sage Accent */}
-          <div className="bg-[#CEE5D0] border border-gray-300/60 rounded-xl p-8 flex flex-col justify-between min-h-[260px] hover:shadow-lg transition-all duration-300 group">
+          <div className="starting-card-1 bg-[#CEE5D0] border border-gray-300/60 rounded-xl p-8 flex flex-col justify-between min-h-[260px] hover:shadow-lg transition-all duration-300 group">
             <div>
               {/* Icon Box */}
               <div className="w-12 h-12 rounded-2xl bg-white/80 shadow-sm flex items-center justify-center mb-6 text-gray-800">
@@ -127,7 +239,7 @@ export const LetUsTalkSection: React.FC = () => {
           </div>
 
           {/* Card 2: Lavender/Purple Accent */}
-          <div className="bg-[#FCF8E8] border border-purple-200/60 rounded-xl p-8 flex flex-col justify-between min-h-[260px] hover:shadow-lg transition-all duration-300 group">
+          <div className="starting-card-2 bg-[#FFFEFA] border border-[#94B49F] rounded-xl p-8 flex flex-col justify-between min-h-[260px] hover:shadow-lg transition-all duration-300 group">
             <div>
               {/* Icon Box */}
               <div className="w-12 h-12 rounded-2xl bg-white/80 shadow-sm flex items-center justify-center mb-6 text-gray-800">

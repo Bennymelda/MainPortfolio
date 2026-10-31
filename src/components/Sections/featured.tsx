@@ -1,14 +1,57 @@
 import React from 'react';
 import { ArrowUpRight, Search} from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { useGSAP } from "@gsap/react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(useGSAP, ScrollTrigger);
 export const ServicesGridSection: React.FC = () => {
+
+  useGSAP(() => {
+  const tl = gsap.timeline({
+    scrollTrigger: {
+      trigger: ".services-grid",
+      start: "top 50%",
+      toggleActions: "play none none reverse",
+    },
+  });
+
+  tl.from(".service-column-1", {
+    x: -35,
+    y: 25,
+    opacity: 0,
+    duration: 0.9,
+    ease: "power3.out",
+  })
+    .from(
+      ".service-column-2",
+      {
+        x: 35,
+        opacity: 0,
+        duration: 0.9,
+        ease: "power3.out",
+      },
+      "-=0.55"
+    )
+    .from(
+      ".service-column-3",
+      {
+        y: 45,
+        opacity: 0,
+        duration: 1.2,
+        ease: "power3.out",
+      },
+      "-=0.55"
+    );
+}, []);
   return (
   
-<section className="w-full bg-[#070711] text-white py-16 px-4 sm:px-8 lg:px-16 overflow-hidden font-sans">
+<section className="services-grid w-full bg-[#070711] text-white py-16 px-4 sm:px-8 lg:px-16 overflow-hidden font-sans">
   <div className="max-w-[1200px] mx-auto grid grid-cols-1 lg:grid-cols-3 gap-6">
 
     {/* COLUMN 1 */}
-    <div className="flex flex-col gap-6">
+    <div className="service-column-1  flex flex-col gap-6">
 
       {/* Header */}
       <div className="p-4 sm:p-6 flex flex-col justify-center min-h-[200px]">
@@ -25,8 +68,8 @@ export const ServicesGridSection: React.FC = () => {
       </div>
 
       {/* See what's possible */}
-      <Link to="/work">
-        <div className="bg-[#181628] border border-white/5 rounded-3xl p-6 sm:p-8 flex flex-col justify-between min-h-[400px] relative overflow-hidden group hover:border-white/20 transition-all duration-300">
+      <a href="#selected-work">
+        <div className="bg-zinc-800 border border-white/5 rounded-3xl p-6 sm:p-8 flex flex-col justify-between min-h-[400px] relative overflow-hidden group hover:border-white/20 transition-all duration-300">
 
           <div>
             <h3 className="text-2xl font-semibold text-white mb-2">
@@ -97,12 +140,12 @@ export const ServicesGridSection: React.FC = () => {
 
           </div>
         </div>
-      </Link>
+      </a>
     </div>
 
 
     {/* COLUMN 2 */}
-    <div className="flex flex-col">
+    <div className="service-column-2 flex flex-col">
 
       <Link to="/contact" className="h-full">
         <div className="h-full min-h-[400px] bg-[#14141a] border border-white/5 rounded-3xl p-6 sm:p-8 flex flex-col justify-between hover:border-white/20 transition-all duration-300 group">
@@ -111,7 +154,7 @@ export const ServicesGridSection: React.FC = () => {
           <div>
             <div className="w-14 h-14 rounded-full overflow-hidden border-2 border-[#94B49F]/30 mb-6">
               <img
-                src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=200"
+                src="./profile-removebg-preview.png?auto=format&fit=crop&q=80&w=200"
                 alt="Avatar"
                 className="w-full h-full object-cover"
               />
@@ -143,7 +186,7 @@ export const ServicesGridSection: React.FC = () => {
 
 
     {/* COLUMN 3 */}
-    <div className="flex flex-col">
+    <div className="service-column-3 flex flex-col">
 
       <Link to="/discovery" className="h-full">
         <div className="h-full min-h-[400px] bg-[#f3f1ec] text-gray-900 rounded-3xl p-6 sm:p-8 flex flex-col justify-between relative overflow-hidden group hover:shadow-xl transition-all duration-300">
