@@ -151,8 +151,8 @@ const taglineText = new SplitText(".title", {
 }, []);
 
  return (
-  <section 
- className="relative z-10 max-w-3xl mt-8 mb-auto py-12 md:my-auto md:py-20 px-4">  
+  <section
+ className="relative z-10 w-full max-w-8xl mx-auto mt-8 mb-auto overflow-x-hidden px-4 py-12 md:py-20">
    
     {/* Background Interactive Canvas */}
  <canvas
@@ -161,8 +161,8 @@ const taglineText = new SplitText(".title", {
 />
 
     {/* Subtle Glows */}
-    <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-green-900/15 rounded-full blur-[120px] pointer-events-none" />
-    <div className="absolute bottom-1/3 right-1/4 w-[500px] h-[500px] bg-green-900/15 rounded-full blur-[150px] pointer-events-none" />
+    <div className="absolute top-1/4 left-1/4 w-64 h-64 sm:w-80 sm:h-80 lg:w-96 lg:h-96 bg-green-900/15 rounded-full blur-[120px] pointer-events-none" />
+    <div className="absolute bottom-1/3 right-1/4 w-72 h-72 sm:w-[400px] sm:h-[400px] lg:w-[500px] lg:h-[500px] bg-green-900/15 rounded-full blur-[150px] pointer-events-none" />
 
     {/* Top Tagline */}
     <div className="relative z-10 pt-2 sm:pt-4 ">
@@ -173,7 +173,7 @@ const taglineText = new SplitText(".title", {
 
     {/* Hero Content */}
     <div className="relative z-10 max-w-3xl my-auto py-8 sm:py-12 md:py-12">
-      <h1 className="heading text-[2.7rem] leading-[1.08] sm:text-6xl md:text-6xl lg:text-8xl font-bold tracking-tight mb-6 sm:mb-8 text-black dark:text-white">
+      <h1 className="heading w-full text-[2.7rem] leading-[1.08] sm:text-6xl md:text-6xl lg:text-8xl font-bold tracking-tight mb-6 sm:mb-8 text-black dark:text-white break-words">
   I turn ideas into <br />
   <span className="text-[#94B49F]">real products.</span>
 </h1>
