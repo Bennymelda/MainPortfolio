@@ -55,7 +55,7 @@ useGSAP(() => {
     scrollTrigger: {
       trigger: ".review-covers-section",
       start: "top 75%",
-      toggleActions: "play none none reverse",
+      toggleActions: "play reset play reset",
     },
   });
 
@@ -79,7 +79,7 @@ gsap.fromTo(
     scrollTrigger: {
       trigger: ".review-covers-grid",
       start: "top 85%",
-      toggleActions: "play none none reverse",
+      toggleActions: "play reset play reset",
     },
   }
 );
@@ -91,7 +91,7 @@ gsap.fromTo(
     scrollTrigger: {
       trigger: ".review-covers-banner",
       start: "top 90%",
-      toggleActions: "play none none reverse",
+      toggleActions: "play reset play reset",
     },
   });
 
@@ -104,7 +104,7 @@ gsap.fromTo(
     scrollTrigger: {
       trigger: ".review-covers-banner",
       start: "top 85%",
-      toggleActions: "play none none reverse",
+      toggleActions: "play reset play reset",
     },
   });
 }, []);
@@ -118,7 +118,7 @@ useGSAP(() => {
     scrollTrigger: {
       trigger: ".how-it-works-section",
       start: "top 80%",
-      toggleActions: "play none none reverse",
+      toggleActions: "play reset play reset",
     },
   });
 
@@ -131,7 +131,7 @@ useGSAP(() => {
     scrollTrigger: {
       trigger: ".how-it-works-cards",
       start: "top 85%",
-      toggleActions: "play none none reverse",
+      toggleActions: "play reset play reset",
     },
   });
 }, []);

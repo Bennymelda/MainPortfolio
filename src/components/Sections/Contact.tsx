@@ -21,7 +21,7 @@ useGSAP(() => {
     scrollTrigger: {
       trigger: ".contact-section",
       start: "top 50%",
-      toggleActions: "play none none reverse",
+      toggleActions: "play reset play reset",
     },
   });
 
@@ -83,7 +83,7 @@ useGSAP(() => {
         {/* Left Column: Heading and Context */}
         <div className="contact-intro lg:col-span-5 flex flex-col justify-between h-full pr-0 lg:pr-6">
           <div>
-            <span className="text-[11px] font-semibold tracking-[0.2em] uppercase text-gray-400 mb-4 block">
+            <span className="text-[11px] font-semibold tracking-[0.2em]  uppercase text-gray-400 mb-4 block">
               LET'S TALK
             </span>
 

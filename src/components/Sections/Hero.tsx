@@ -4,6 +4,9 @@ import { Link } from "react-router-dom";
 import {useGSAP} from "@gsap/react"
 import gsap from 'gsap';
 import { SplitText } from 'gsap/SplitText';
+gsap.registerPlugin(SplitText);
+
+
 export const HeroSection: React.FC = () => {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
 
@@ -96,6 +99,7 @@ export const HeroSection: React.FC = () => {
     };
   }, []);
 
+ 
 useGSAP(() => {
   const heroHeading = new SplitText(".heading", {
     type: "lines",
@@ -147,38 +151,40 @@ const taglineText = new SplitText(".title", {
 }, []);
 
  return (
-  <section className="relative w-full min-h-screen bg-white dark:bg-zinc-900 text-white flex flex-col justify-between overflow-hidden px-6 md:px-6 lg:px-6 pt-24 pb-12 select-none">
+  <section 
+ className="relative z-10 max-w-3xl mt-8 mb-auto py-12 md:my-auto md:py-20 px-4">  
+   
     {/* Background Interactive Canvas */}
-    <canvas
-      ref={canvasRef}
-      className="absolute inset-0 pointer-events-none z-0"
-    />
+ <canvas
+ ref={canvasRef}
+ className="fixed inset-0 w-full h-full pointer-events-none z-0"
+/>
 
     {/* Subtle Glows */}
     <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-green-900/15 rounded-full blur-[120px] pointer-events-none" />
     <div className="absolute bottom-1/3 right-1/4 w-[500px] h-[500px] bg-green-900/15 rounded-full blur-[150px] pointer-events-none" />
 
     {/* Top Tagline */}
-    <div className="relative z-10 pt-4">
+    <div className="relative z-10 pt-2 sm:pt-4 ">
       <span className="title text-[11px] font-semibold tracking-[0.2em] uppercase text-gray-800 dark:text-gray-300">
         FRONTEND DEVELOPER
       </span>
     </div>
 
     {/* Hero Content */}
-    <div className="relative z-10 max-w-3xl my-auto py-12">
-      <h1 className="heading text-5xl sm:text-6xl md:text-6xl lg:text-8xl font-bold tracking-tight leading-[1.05] mb-8 text-black dark:text-white">
-        I turn ideas into <br />
-        <span className="text-[#94B49F]">real products.</span>
-      </h1>
+    <div className="relative z-10 max-w-3xl my-auto py-8 sm:py-12 md:py-12">
+      <h1 className="heading text-[2.7rem] leading-[1.08] sm:text-6xl md:text-6xl lg:text-8xl font-bold tracking-tight mb-6 sm:mb-8 text-black dark:text-white">
+  I turn ideas into <br />
+  <span className="text-[#94B49F]">real products.</span>
+</h1>
 
-      <p className="subtitle text-gray-800 dark:text-gray-400 text-sm sm:text-base md:text-base max-w-sm leading-relaxed mb-10 font-normal">
+      <p className="subtitle text-gray-800 dark:text-gray-400 text-sm sm:text-base max-w-sm leading-relaxed mb-7 sm:mb-10 font-normal">
   I build conversion-focused websites and web applications that help
   businesses turn attention into trust, and trust into action.
 </p>
 
       {/* Action Buttons */}
-      <div className="hero-buttons flex flex-wrap items-center gap-6">
+      <div className="hero-buttons flex flex-wrap items-center gap-4 sm:gap-6">
         <Link
           to="/contact"
           className="inline-flex items-center gap-2 bg-[#94B49F] text-black font-medium text-sm px-4 py-2 rounded-md hover:bg-[#839f8d] transition-colors shadow-lg shadow-white/5"
@@ -187,13 +193,13 @@ const taglineText = new SplitText(".title", {
           <ArrowUpRight className="w-4 h-4" />
         </Link>
 
-        <a
-          href="#work"
+        <Link
+          to="/work"
           className="inline-flex items-center gap-2 text-gray-800 dark:text-gray-300 hover:text-black dark:hover:text-white font-medium text-sm transition-colors py-2"
         >
           Explore my work
           <ArrowDown className="w-4 h-4" />
-        </a>
+        </Link>
       </div>
     </div>
 
@@ -203,4 +209,4 @@ const taglineText = new SplitText(".title", {
 );
 };
 
-export default HeroSection;
+export default HeroSection;  

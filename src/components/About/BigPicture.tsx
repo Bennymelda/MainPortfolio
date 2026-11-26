@@ -10,91 +10,93 @@ export const BigPictureSection: React.FC = () => {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
 
   useEffect(() => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
-    const ctx = canvas.getContext('2d');
-    if (!ctx) return;
-
-    let animationFrameId: number;
-    let width = (canvas.width = window.innerWidth);
-    let height = (canvas.height = window.innerHeight);
-
-    const handleResize = () => {
+      const canvas = canvasRef.current;
       if (!canvas) return;
-      width = canvas.width = window.innerWidth;
-      height = canvas.height = window.innerHeight;
-    };
-
-    window.addEventListener('resize', handleResize);
-
-    // Background star particles
-    const stars = Array.from({ length: 140 }, () => ({
-      x: Math.random() * width,
-      y: Math.random() * height,
-      radius: Math.random() * 1.2 + 0.3,
-      alpha: Math.random() * 0.7 + 0.3,
-      speed: Math.random() * 0.01 + 0.003,
-    }));
-
-    // Particle swirl on the right background
-    const swirlParticles = Array.from({ length: 800 }, () => {
-      const angle = Math.random() * Math.PI * 2;
-      const rx = 320 + Math.random() * 100;
-      const ry = 160 + Math.random() * 60;
-      return {
-        angle,
-        rx,
-        ry,
-        size: Math.random() * 1.3 + 0.4,
-        speed: (Math.random() * 0.001 + 0.0004) * (Math.random() > 0.5 ? 1 : -1),
-        alpha: Math.random() * 0.6 + 0.2,
+      const ctx = canvas.getContext('2d');
+      if (!ctx) return;
+  
+      let animationFrameId: number;
+      let width = (canvas.width = window.innerWidth);
+      let height = (canvas.height = window.innerHeight);
+  
+      const handleResize = () => {
+        if (!canvas) return;
+        width = canvas.width = window.innerWidth;
+        height = canvas.height = window.innerHeight;
       };
-    });
-
-    const render = () => {
-      ctx.clearRect(0, 0, width, height);
-
-      // Draw background stars
-      stars.forEach((star) => {
-        star.alpha += Math.sin(Date.now() * star.speed) * 0.01;
-        ctx.beginPath();
-        ctx.arc(star.x, star.y, star.radius, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(220, 225, 255, ${Math.max(0.1, Math.min(1, star.alpha))})`;
-        ctx.fill();
+  
+      window.addEventListener('resize', handleResize);
+  
+      // Generate random background star particles
+      const stars = Array.from({ length: 150 }, () => ({
+        x: Math.random() * width,
+        y: Math.random() * height,
+        radius: Math.random() * 1.2 + 0.3,
+        alpha: Math.random() * 0.7 + 0.3,
+        speed: Math.random() * 0.01 + 0.003,
+      }));
+  
+      // Generate ring particles for the cosmic oval on the right
+      const ringParticles = Array.from({ length: 800 }, () => {
+        const angle = Math.random() * Math.PI * 2;
+        const rx = 280 + Math.random() * 60; // horizontal radius dispersion
+        const ry = 140 + Math.random() * 30; // vertical tilt dispersion
+        return {
+          angle,
+          rx,
+          ry,
+          size: Math.random() * 1.2 + 0.4,
+          speed: (Math.random() * 0.001 + 0.0005) * (Math.random() > 0.5 ? 1 : -1),
+          alpha: Math.random() * 0.6 + 0.2,
+        };
       });
-
-      // Draw cosmic particle ring on the right
-      const centerX = width * 0.75;
-      const centerY = height * 0.5;
-      const rotationAngle = -Math.PI / 8;
-
-      ctx.save();
-      ctx.translate(centerX, centerY);
-      ctx.rotate(rotationAngle);
-
-      swirlParticles.forEach((p) => {
-        p.angle += p.speed;
-        const px = Math.cos(p.angle) * p.rx;
-        const py = Math.sin(p.angle) * p.ry;
-
-        ctx.beginPath();
-        ctx.arc(px, py, p.size, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(160, 140, 230, ${p.alpha})`;
-        ctx.fill();
-      });
-
-      ctx.restore();
-
-      animationFrameId = requestAnimationFrame(render);
-    };
-
-    render();
-
-    return () => {
-      window.removeEventListener('resize', handleResize);
-      cancelAnimationFrame(animationFrameId);
-    };
-  }, []);
+  
+      const render = () => {
+        ctx.clearRect(0, 0, width, height);
+  
+        // Draw starry background
+        stars.forEach((star) => {
+          star.alpha += Math.sin(Date.now() * star.speed) * 0.01;
+          ctx.beginPath();
+          ctx.arc(star.x, star.y, star.radius, 0, Math.PI * 2);
+          ctx.fillStyle = `rgba(148, 180, 159, ${Math.max(0.1, Math.min(1, star.alpha))})`;
+          ctx.fill();
+        });
+  
+        // Draw cosmic ring on the right
+        const centerX = width * 0.75;
+        const centerY = height * 0.45;
+        const rotationAngle = -Math.PI / 8; // tilt angle
+  
+        ctx.save();
+        ctx.translate(centerX, centerY);
+        ctx.rotate(rotationAngle);
+  
+        ringParticles.forEach((p) => {
+    p.angle += p.speed;
+  
+    const px = Math.cos(p.angle) * p.rx;
+    const py = Math.sin(p.angle) * p.ry;
+  
+    ctx.beginPath();
+    ctx.arc(px, py, p.size, 0, Math.PI * 2);
+  
+    ctx.fillStyle = `rgba(148, 180, 159, ${p.alpha})`;
+  
+    ctx.fill();
+  });
+        ctx.restore();
+  
+        animationFrameId = requestAnimationFrame(render);
+      };
+  
+      render();
+  
+      return () => {
+        window.removeEventListener('resize', handleResize);
+        cancelAnimationFrame(animationFrameId);
+      };
+    }, []);
 
 
   useGSAP(() => {
@@ -105,8 +107,8 @@ export const BigPictureSection: React.FC = () => {
   const tl = gsap.timeline({
     scrollTrigger: {
       trigger: ".about-services-section",
-      start: "top 70%",
-      toggleActions: "play none none reverse",
+      start: "top 50%",
+      toggleActions: "play reset play reset",
     },
   });
 
@@ -157,7 +159,7 @@ export const BigPictureSection: React.FC = () => {
       scrollTrigger: {
         trigger: item,
         start: "top 88%",
-        toggleActions: "play none none reverse",
+        toggleActions: "play reset play reset",
       },
     });
   });
@@ -187,7 +189,7 @@ export const BigPictureSection: React.FC = () => {
   ];
 
   return (
-    <section className="about-services-section relative w-full bg-white dark:bg-zinc-900 text-white py-24 px-6 sm:px-6 lg:px-6 overflow-hidden font-sans">
+    <section className="about-services-section relative w-full bg-white dark:bg-[#141414] text-white py-24 px-6 sm:px-6 lg:px-6 overflow-hidden font-sans">
       
       <canvas
         ref={canvasRef}

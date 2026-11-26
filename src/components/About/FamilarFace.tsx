@@ -26,7 +26,7 @@ export const FamiliarFaceSection: React.FC = () => {
     scrollTrigger: {
       trigger: ".about-purpose-section",
       start: "top 70%",
-      toggleActions: "play none none reverse",
+      toggleActions: "play reset play reset",
     },
   });
 
@@ -77,7 +77,7 @@ export const FamiliarFaceSection: React.FC = () => {
     scrollTrigger: {
       trigger: ".about-purpose-image",
       start: "top 85%",
-      toggleActions: "play none none reverse",
+      toggleActions: "play reset play reset",
     },
   });
 }, []);
@@ -91,8 +91,8 @@ useGSAP(() => {
     ease: "power2.out",
     scrollTrigger: {
       trigger: ".next-chapter-section",
-      start: "top 70%",
-      toggleActions: "play none none reverse",
+      start: "top 60%",
+      toggleActions: "play reset play reset",
     },
   });
 
@@ -104,13 +104,13 @@ useGSAP(() => {
     scrollTrigger: {
       trigger: ".next-chapter-section",
       start: "top 70%",
-      toggleActions: "play none none reverse",
+      toggleActions: "play reset play reset",
     },
   });
 }, []);
   return (
     <>
-    <section className="about-purpose-section w-full bg-white dark:bg-zinc-900 dark:text-black text-white py-24 px-6 sm:px-6 lg:px-6 font-sans">
+    <section className="about-purpose-section w-full bg-white dark:bg-[#141414] dark:text-black text-white py-24 px-6 sm:px-6 lg:px-6 font-sans">
       <div className="max-w-9xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
         
         {/* Left Column: Image Showcase */}
@@ -126,7 +126,7 @@ useGSAP(() => {
 
         {/* Right Column: Copy & Details */}
        
-<div className="lg:col-span-6 flex flex-col items-start">
+<div className="lg:col-span-6 flex flex-col items-start ">
   <span className="about-purpose-label text-[11px] font-semibold tracking-[0.2em] uppercase text-gray-700 dark:text-gray-400 mb-4 block">
     DESIGN-MINDED. DEVELOPMENT-FOCUSED.
   </span>

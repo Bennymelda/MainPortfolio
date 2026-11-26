@@ -12,7 +12,7 @@ import Navbar from './components/Sections/Nav';
 import WorkingTogetherSection from './components/Sections/QA';
 import ScrollToTop from './components/Sections/ScrollTop';
 import AboutSection from './components/Sections/SubAbout';
-import ProjectDetails from './components/Project/ProjectDetails';
+import ProjectDetails from './components/Project/ProjecrDet';
 import './index.css';
 
 import { Route, Routes, useParams, useNavigate } from 'react-router-dom';

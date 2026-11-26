@@ -75,7 +75,7 @@ export const AboutHeroSection: React.FC = () => {
     scrollTrigger: {
       trigger: ".about-hero",
       start: "top 70%",
-      toggleActions: "play none none reverse",
+      toggleActions: "play reset play reset",
     },
   });
 
@@ -154,7 +154,7 @@ useGSAP(() => {
     scrollTrigger: {
       trigger: ".about-story-section",
       start: "top 75%",
-      toggleActions: "play none none reverse",
+      toggleActions: "play reset play reset",
     },
   });
 
@@ -219,7 +219,7 @@ useGSAP(() => {
 }, []);
   return (
     <>
-    <section className="	about-hero relative w-full bg-white dark:bg-zinc-900 text-white py-20 px-6 sm:px-6 lg:px-6 overflow-hidden font-sans min-h-[600px] flex items-center">
+    <section className="	about-hero relative w-full bg-white dark:bg-[#141414] text-white py-20 px-6 sm:px-6 lg:px-6 overflow-hidden font-sans min-h-[600px] flex items-center">
       {/* Background Star Canvas */}
       <canvas
         ref={canvasRef}

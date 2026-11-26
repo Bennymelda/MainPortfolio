@@ -3,7 +3,7 @@ import { ArrowUpRight, MessageSquare } from 'lucide-react';
 import {Link} from "react-router-dom"
 export const FooterSection: React.FC = () => {
   return (
-    <footer className="w-full bg-gray-100 dark:bg-[#14111a] text-white pt-16 pb-12 px-6 md:px-12 lg:px-20 border-t border-white/10 font-sans relative">
+    <footer className="w-full bg-gray-100 dark:bg-zinc-900 text-white pt-16 pb-12 px-6 md:px-12 lg:px-20 border-t border-white/10 font-sans relative">
       <div className="max-w-8xl mx-auto">
         {/* Main Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 lg:gap-8 pb-16">

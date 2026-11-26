@@ -91,7 +91,7 @@ useGSAP(() => {
       scrollTrigger: {
         trigger: item,
         start: "top 70%",
-        toggleActions: "play none none reverse",
+        toggleActions: "play reset play reset",
       },
     });
   });

@@ -13,7 +13,7 @@ export const ServicesGridSection: React.FC = () => {
     scrollTrigger: {
       trigger: ".services-grid",
       start: "top 50%",
-      toggleActions: "play none none reverse",
+      toggleActions: "play reset play reset",
     },
   });
 
@@ -45,6 +45,7 @@ export const ServicesGridSection: React.FC = () => {
       "-=0.55"
     );
 }, []);
+
   return (
   
 <section className="services-grid w-full bg-[#070711] text-white py-16 px-4 sm:px-8 lg:px-16 overflow-hidden font-sans">

@@ -34,7 +34,7 @@ useGSAP(() => {
     scrollTrigger: {
       trigger: ".working-together",
       start: "top 50%",
-      toggleActions: "play none none reverse",
+      toggleActions: "play reset play reset",
     },
   });
 

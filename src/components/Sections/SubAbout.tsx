@@ -115,7 +115,7 @@ useGSAP(() => {
     scrollTrigger: {
       trigger: ".about-section",
       start: "top 60%",
-      toggleActions: "play none none reverse",
+      toggleActions: "play reset play reset",
     },
   });
 

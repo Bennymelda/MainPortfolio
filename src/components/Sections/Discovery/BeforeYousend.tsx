@@ -45,7 +45,7 @@ useGSAP(() => {
     scrollTrigger: {
       trigger: ".faq-section",
       start: "top 80%",
-      toggleActions: "play none none reverse",
+      toggleActions: "play reset play reset",
     },
   });
 

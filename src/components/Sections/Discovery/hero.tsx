@@ -64,7 +64,7 @@ export const FreeWebsiteReviewSection: React.FC = () => {
     scrollTrigger: {
       trigger: ".audit-hero-section",
       start: "top 75%",
-      toggleActions: "play none none reverse",
+      toggleActions: "play reset play reset",
     },
   });
 

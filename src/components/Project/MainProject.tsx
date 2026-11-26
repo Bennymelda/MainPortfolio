@@ -23,8 +23,8 @@ useGSAP(() => {
   const tl = gsap.timeline({
     scrollTrigger: {
       trigger: '.work-header',
-      start: 'top 75%',
-      toggleActions: 'play none none reverse',
+      start: 'top 55%',
+      toggleActions: 'play reset play reset',
     },
   });
 
@@ -55,7 +55,7 @@ useGSAP(() => {
 
   return (
     <>
-    <section className="w-full bg-white dark:bg-zinc-900 text-gray-900 pt-20 pb-12 px-6 sm:px-6 lg:px-6 font-sans">
+    <section className="w-full bg-white dark:bg-[#141414] text-gray-900 pt-20  px-6 sm:px-6 lg:px-6 font-sans">
       <div className="max-w-8xl mx-auto">
         
         {/* Top Header Grid */}
@@ -90,7 +90,7 @@ useGSAP(() => {
         </div>
 
         {/* Filter Bar */}
-        <div className="border-t border-b border-gray-200/80 dark:border-gray-800/80 py-4 flex flex-col md:flex-row items-stretch md:items-center justify-between gap-4 mb-8">
+        <div className="border-t border-b border-gray-200/80 dark:border-gray-800/80 py-4 flex flex-col md:flex-row items-stretch md:items-center justify-between gap-4 ">
           
           {/* Category Tabs */}
           <div className="flex flex-wrap items-center gap-2">
@@ -132,7 +132,10 @@ useGSAP(() => {
       </div>
    
     </section>
-     <SelectedWorkSection isMainProjectPage={true} />
+     <SelectedWorkSection
+  isMainProjectPage={true}
+  searchQuery={searchQuery}
+/>
     <FooterSection />
     </>
   );

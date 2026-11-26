@@ -20,7 +20,7 @@ useGSAP(() => {
     scrollTrigger: {
       trigger: ".contact-section",
       start: "top 40%",
-      toggleActions: "play none none reverse",
+      toggleActions: "play reset play reset",
     },
   });
 
@@ -97,7 +97,7 @@ useGSAP(() => {
     scrollTrigger: {
       trigger: ".starting-section",
       start: "top 75%",
-      toggleActions: "play none none reverse",
+      toggleActions: "play reset play reset",
     },
   });
 
@@ -113,14 +113,14 @@ useGSAP(() => {
       scrollTrigger: {
         trigger: card,
         start: "top 90%",
-        toggleActions: "play none none reverse",
+        toggleActions: "play reset play reset",
       },
     });
   });
 }, []);
   return (
     <>
-    <section className="contact-section w-full bg-white dark:bg-zinc-900 text-black dark:text-white py-20 px-6 sm:px-6 lg:px-6 font-sans">
+    <section className="contact-section w-full bg-white dark:bg-[#141414] text-black dark:text-white py-20 px-6 sm:px-6 lg:px-6 font-sans">
       <div className="max-w-9xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
         
         {/* Left Column: Heading, Bio, and Email */}
